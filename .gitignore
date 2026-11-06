@@ -1,0 +1,39 @@
+# secrets and local env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.seed
+secrets/
+
+# wallet profiles and sessions
+.baw/
+**/.baw/
+*.baw
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# generated precheck / sim / voucher output
+out/
+**/out/
+*.log
+
+# live challenge and proof dumps
+*challenge*.json
+pearl-solutions.json
+pearl-solutions-latest.json
+pearl-solution.json
+pearl-batch-*.json
+*.submit.json
+*.dryrun.json
+*.reason.txt
+pearl-state/
+
+# editor
+.DS_Store
+*.swp

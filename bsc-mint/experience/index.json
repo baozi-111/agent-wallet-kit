@@ -1,0 +1,513 @@
+{
+  "schemaVersion": 1,
+  "chainId": 56,
+  "updatedAt": "2026-11-04T22:29:04+08:00",
+  "projects": [
+    {
+      "id": "pacture-pvpmint",
+      "name": "PACTURE",
+      "url": "https://pacture.pvpmint.com/",
+      "ca": "0x95AF9fe16fE5c1741b5E3F1b3b045a8c2470eca9",
+      "token": "0x10b80088fDAf9363d83671BE66b64f231f9e92f6",
+      "chainId": 56,
+      "proxy": null,
+      "implementation": null,
+      "selectors": {
+        "mint": "0x94bf804d",
+        "mintWithBNB": "0x9ad453fc",
+        "quoteBNB": "0x0b59714d",
+        "refund": "0x590e1ae3"
+      },
+      "notes": "Free=1 share auto on first mint while free remain; call mint(0,referrer) value=0 for free-only. Free 7700/7700 sold out 2026-11-04; paid 0.5 USDT/share via mint(n,ref) or mintWithBNB. Tokens non-transferable until 11000 sold. Agent ID required.",
+      "lastAttempt": {
+        "at": "2026-11-04T22:29:04+08:00",
+        "wallet": "xiaogu.ai",
+        "action": "free mint only",
+        "result": "blocked",
+        "reason": "free sold out 7700/7700; eth_call mint(0,0) reverts nothing to mint; api freeAvailable=false hasMinted=false",
+        "stats": {
+          "sharesMinted": 9055,
+          "freeMinted": 7700,
+          "paidShares": 1355
+        }
+      },
+      "updatedAt": "2026-11-04T22:29:04+08:00"
+    },
+    {
+      "id": "egg-nft",
+      "name": "Egg NFT",
+      "url": "https://egg-nft.deed.page/",
+      "ca": "0xCBde1219862E61e3B2e9f417016f2C04f2E033Cf",
+      "chainId": 56,
+      "proxy": null,
+      "implementation": null,
+      "bytecodeSha256": "a0b236663ad08987453c60ff4f336fea32ae6f74e568875451b758bf084548f7",
+      "bytecodePrefix16": "a0b236663ad08987",
+      "selectors": {
+        "claim()": "0x4e71d92d",
+        "mint(uint256)": "0xa0712d68",
+        "publicMintOpen()": "0xbcc9ca5b",
+        "mintPriceWei()": "0xcb2c9722",
+        "mintStatus(address)": "0x0deab810",
+        "canMintNow(address)": "0x914bd6ae",
+        "freeClaimed(address)": "0x61c0b6a0",
+        "remainingMintQuota(address)": "0x2066d7b8",
+        "paused()": "0x5c975abb"
+      },
+      "mintMethod": {
+        "signature": "claim()",
+        "selector": "0x4e71d92d",
+        "valueMode": "zero",
+        "argsTemplate": [],
+        "paidAlt": {
+          "signature": "mint(uint256)",
+          "selector": "0xa0712d68",
+          "valueMode": "quote"
+        }
+      },
+      "price": {
+        "freePath": true,
+        "paidNote": "1 free/account; paid mint(uint256) ~$1 BNB via mintPriceWei/quote",
+        "readFns": [
+          "mintPriceWei()",
+          "publicMintOpen()"
+        ]
+      },
+      "eligibility": {
+        "requiresAgentId": true,
+        "registry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+        "readFns": [
+          "canMintNow(address)",
+          "mintStatus(address)",
+          "freeClaimed(address)"
+        ]
+      },
+      "statusReads": [
+        "publicMintOpen()",
+        "paused()",
+        "freeMinted()",
+        "totalSupply()"
+      ],
+      "successPath": "claim() value=0 → EGG #96; preview then execute via ox-baw; tx 0x7f827317…b283",
+      "failureReasons": [
+        "free already claimed",
+        "publicMintOpen=false",
+        "no Agent ID",
+        "paused"
+      ],
+      "timings": {
+        "precheck_ms": 1200,
+        "preview_ms": 2500
+      },
+      "firstSeen": "2026-11-01T15:56:50+08:00",
+      "lastVerified": "2026-11-03T13:42:00+08:00",
+      "outcome": "success",
+      "confidence": 0.95,
+      "source_files": [
+        "local evidence path redacted"
+      ],
+      "notes": "deed.page family; smash game; trading locked until sold out",
+      "matchHints": {
+        "selectorSet": [
+          "0x4e71d92d",
+          "0xa0712d68",
+          "0xbcc9ca5b",
+          "0xcb2c9722"
+        ],
+        "family": "deed-claim"
+      }
+    },
+    {
+      "id": "nemotron-sigil",
+      "name": "Nemotron Sigil",
+      "url": "https://nemotron.trade",
+      "ca": "0xDd8BdfC91cbD572935B09863A742d8296fed0ACf",
+      "chainId": 56,
+      "proxy": null,
+      "implementation": null,
+      "bytecodeSha256": "993f285e1674973a9aa9f82baf825bc6404ce4ef2a0173617a25e96b5e47819f",
+      "bytecodePrefix16": "993f285e1674973a",
+      "selectors": {
+        "mint(uint256)": "0xa0712d68",
+        "mintWithBnb(uint256)": "0x5c32409a",
+        "quote(uint256,uint256)": null,
+        "quoteBnbFor(address,uint256)": null,
+        "mintOpensAt()": null
+      },
+      "mintMethod": {
+        "signature": "mint(uint256)",
+        "selector": "0xa0712d68",
+        "valueMode": "zero",
+        "argsTemplate": [
+          "quantity"
+        ],
+        "note": "free first 2 Sigils per Agent ID when quote=0; else approve USDT or mintWithBnb"
+      },
+      "price": {
+        "freePath": true,
+        "paidNote": "~0.0014 BNB or USDT per paid Sigil; max 4/handle; use quoteFor/quoteBnbFor",
+        "readFns": [
+          "quoteFor(address,uint256)",
+          "quoteBnbFor(address,uint256)",
+          "mintOpensAt()"
+        ]
+      },
+      "eligibility": {
+        "requiresAgentId": true,
+        "registry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+        "gate": "0x4e8a6A2feb5364c3206373aE2A5E2d5E0fa4F17B",
+        "readFns": [
+          "quoteFor(address,uint256)"
+        ]
+      },
+      "statusReads": [
+        "mintOpensAt()",
+        "totalSupply()",
+        "paused()"
+      ],
+      "successPath": "mint(2) value=0 free → SIGIL #13391+#13392; tx 0xcb99f68b…d58c",
+      "failureReasons": [
+        "quota exhausted",
+        "mint not open",
+        "USDT not approved for paid path",
+        "wrong value on mintWithBnb"
+      ],
+      "timings": {
+        "precheck_ms": 1500,
+        "preview_ms": 2800
+      },
+      "firstSeen": "2026-11-01T15:56:50+08:00",
+      "lastVerified": "2026-11-03T13:42:00+08:00",
+      "outcome": "success",
+      "confidence": 0.9,
+      "source_files": [
+        "local evidence path redacted"
+      ],
+      "notes": "Sigil CA; related Forge/Emitter not for free mint",
+      "matchHints": {
+        "selectorSet": [
+          "0xa0712d68",
+          "0x5c32409a"
+        ],
+        "family": "sigil-quote"
+      }
+    },
+    {
+      "id": "niulai-agent-launch",
+      "name": "牛来 NIULAI",
+      "url": "https://niulaiai.fun",
+      "ca": "0x15e47c22df42D94Fa2f0aD078Fec5Bea6453d5cF",
+      "chainId": 56,
+      "proxy": null,
+      "implementation": null,
+      "bytecodeSha256": "d084cbfaccf589320090edf991fb8eef0bbe1c7bdbc90e3e7e59c4e6efad7746",
+      "bytecodePrefix16": "d084cbfaccf58932",
+      "selectors": {
+        "claimFree()": "0xf366afc9",
+        "mint(uint256,address)": "0x94bf804d",
+        "info()": "0x370158ea",
+        "userInfo(address)": "0x1959a002"
+      },
+      "mintMethod": {
+        "signature": "claimFree()",
+        "selector": "0xf366afc9",
+        "valueMode": "zero",
+        "argsTemplate": [],
+        "paidAlt": {
+          "signature": "mint(uint256,address)",
+          "selector": "0x94bf804d",
+          "valueMode": "wei",
+          "note": "value = requested * info().price; referrer optional"
+        }
+      },
+      "price": {
+        "freePath": true,
+        "paidNote": "1 free share/Agent ID; paid path info().price wei BNB (native)",
+        "readFns": [
+          "info()",
+          "userInfo(address)"
+        ]
+      },
+      "eligibility": {
+        "requiresAgentId": true,
+        "registry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+        "readFns": [
+          "userInfo(address)",
+          "info()"
+        ]
+      },
+      "statusReads": [
+        "info()"
+      ],
+      "successPath": "claimFree() → ≈54218 NIULAI; tx 0x54ec0a93…0177",
+      "failureReasons": [
+        "free already claimed",
+        "phase!=open",
+        "QuotaExceeded on paid mint",
+        "sold out"
+      ],
+      "timings": {
+        "precheck_ms": 1100,
+        "preview_ms": 2200
+      },
+      "firstSeen": "2026-11-01T15:56:50+08:00",
+      "lastVerified": "2026-11-03T13:42:00+08:00",
+      "outcome": "success",
+      "confidence": 0.92,
+      "source_files": [
+        "local evidence path redacted"
+      ],
+      "notes": "AgentLaunch pattern; CA = token launch contract",
+      "matchHints": {
+        "selectorSet": [
+          "0xf366afc9",
+          "0x370158ea",
+          "0x1959a002"
+        ],
+        "family": "agent-launch"
+      }
+    },
+    {
+      "id": "genesis-seeds",
+      "name": "Genesis Seeds GSEED",
+      "url": "https://genesis-seeds.pages.dev",
+      "ca": "0xe9522648503c626ad84e5bc7445d1e26c89f6fec",
+      "chainId": 56,
+      "proxy": null,
+      "implementation": null,
+      "bytecodeSha256": "f89862673cb4f08627bc85c260c141522339d144f5c389fbac481ca270eff452",
+      "bytecodePrefix16": "f89862673cb4f086",
+      "selectors": {
+        "mint(uint256)": "0xa0712d68"
+      },
+      "mintMethod": {
+        "signature": "mint(uint256)",
+        "selector": "0xa0712d68",
+        "valueMode": "zero",
+        "argsTemplate": [
+          2
+        ],
+        "note": "2 free GSEED; paid qty 3-5 need 0.0004 BNB each (re-verify)"
+      },
+      "price": {
+        "freePath": true,
+        "paidNote": "hourly window 1000; paid ~0.0004 BNB for extras",
+        "readFns": []
+      },
+      "eligibility": {
+        "requiresAgentId": true,
+        "registry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+        "readFns": []
+      },
+      "statusReads": [
+        "totalSupply()",
+        "paused()"
+      ],
+      "successPath": "mint(2) value=0 → GSEED #5747 #5748; preview action 0xa0712d68; tx 0xfd559258…cd98",
+      "failureReasons": [
+        "free quota used",
+        "hourly window empty",
+        "value mismatch on paid"
+      ],
+      "timings": {
+        "precheck_ms": 900,
+        "preview_ms": 2000
+      },
+      "firstSeen": "2026-10-31T00:00:00+08:00",
+      "lastVerified": "2026-11-03T13:42:00+08:00",
+      "outcome": "success",
+      "confidence": 0.88,
+      "source_files": [
+        "local evidence path redacted"
+      ],
+      "notes": "Related registry/helper 0xb03032bec6871e4b6835a5619f61045bae8ff049",
+      "matchHints": {
+        "selectorSet": [
+          "0xa0712d68"
+        ],
+        "family": "gseed-qty"
+      }
+    },
+    {
+      "id": "mars-nexus",
+      "name": "MARS NEXUS",
+      "url": "https://marsnexus.fun",
+      "ca": "0xC4059D2F9F6F86695896e68F3E73E1e6cC3791c8",
+      "chainId": 56,
+      "proxy": null,
+      "implementation": null,
+      "bytecodeSha256": "2dda072d54485b35cd90189032c7dd0af2ed401211a16cae3290b805e74fdfa6",
+      "bytecodePrefix16": "2dda072d54485b35",
+      "selectors": {},
+      "mintMethod": {
+        "signature": "unknown-first-free",
+        "selector": null,
+        "valueMode": "zero",
+        "argsTemplate": [],
+        "note": "1st MARSID free; later 2.99/4.44 USDT — escalate if selectors not refreshed"
+      },
+      "price": {
+        "freePath": true,
+        "paidNote": "2nd 2.99 USDT; 3rd-5th 4.44 USDT; VRF tier pending",
+        "readFns": []
+      },
+      "eligibility": {
+        "requiresAgentId": true,
+        "registry": "0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F",
+        "readFns": []
+      },
+      "statusReads": [
+        "paused()",
+        "totalSupply()"
+      ],
+      "successPath": "first free MARSID #7182; tx 0x46ce56d4…e2b7; tier pending VRF",
+      "failureReasons": [
+        "personal quota 5 reached",
+        "USDT approve needed for paid",
+        "mint closed"
+      ],
+      "timings": {
+        "precheck_ms": 1800
+      },
+      "firstSeen": "2026-11-01T15:56:50+08:00",
+      "lastVerified": "2026-11-03T13:42:00+08:00",
+      "outcome": "success",
+      "confidence": 0.75,
+      "source_files": [
+        "local evidence path redacted"
+      ],
+      "notes": "ABI file on disk was HTML mis-save; selector set incomplete — match mainly by CA/bytecode",
+      "matchHints": {
+        "selectorSet": [],
+        "family": "mars-usdt-tier"
+      }
+    },
+    {
+      "id": "buildnbuild-gongjian",
+      "name": "Build N Build / 共建",
+      "url": "http://buildnbuild.xyz/#mint",
+      "ca": "0xf93e893003bB8feD50F19Ce0d9589AeDf36D5b2c",
+      "tokenCa": "0x460610467e2EF0ea96642AE379764D268081D8DD",
+      "chainId": 56,
+      "proxy": null,
+      "implementation": null,
+      "selectors": {
+        "mint(uint256)": "0xa0712d68",
+        "quote(uint256)": "unknown_but_exists",
+        "currentPrice()": "unknown_but_exists",
+        "totalMinted()": "unknown_but_exists",
+        "tokensForShare(uint256)": "0x063ea7b9",
+        "wbnb()": "0x8d72647e",
+        "router()": "0xf887ea40",
+        "treasury()": "0x61d027b3"
+      },
+      "mintMethod": {
+        "signature": "mint(uint256)",
+        "selector": "0xa0712d68",
+        "valueMode": "quote_or_currentPrice_x_n_with_headroom",
+        "argsTemplate": [
+          "uint256 shares 1-10"
+        ],
+        "notes": "eth_call needs msg.value; InsufficientPayment if short. Preview balanceChanges show exact cost."
+      },
+      "price": {
+        "freePath": false,
+        "paidNote": "tiered BNB bonding; after 10k shares tokensPerShare=100M; max 10/agent",
+        "readFns": [
+          "currentPrice()",
+          "quote(uint256)",
+          "totalMinted()"
+        ]
+      },
+      "eligibility": {
+        "requiresAgentId": true,
+        "maxPerWallet": 10
+      },
+      "successPath": "mint(10) with value>=quoted; then market sell token->BNB (sell tax ~2%, use high slippage)",
+      "failureReasons": [
+        "InsufficientPayment if value too low",
+        "need Agent ID"
+      ],
+      "timings": {
+        "precheck_to_broadcast_s": "~minutes when researching cold; hot path preview~1.4s execute~1.6s"
+      },
+      "outcome": {
+        "status": "minted_and_sold",
+        "wallet": "xiaogu.ai",
+        "mintTx": "0xc943d04b03db911a955aeb483a0b148941a5203a8d64a5b5245dbc48663bab49",
+        "sellTx": "0xe34daf55cd33b6a908870110b007d34ae4ee143359dbf6b150a955ec11086178",
+        "costBNB": 0.0432,
+        "soldBNB": 0.0439994150786188,
+        "tokens": 1000000000,
+        "at": "2026-11-03T13:48+08:00"
+      },
+      "firstSeen": "2026-11-03",
+      "lastVerified": "2026-11-03T13:48+08:00",
+      "confidence": 0.9,
+      "source_files": [
+        "live baw preview/exec",
+        "bscscan txs",
+        "site FAQ CAs"
+      ]
+    },
+    {
+      "name": "Orzo",
+      "url": "https://theorzo.world/mint",
+      "nft": "0x39f61C0a379f132D66FB8c2ADab293E6a7595B0a",
+      "token": "0xDdF2575710310268c0cca545a2221D1d34DcF88A",
+      "note": "first mint free; mint(uint256); need .ai Agent ID; max 25/wallet; claim(uint256[]) on ORZO token; 13333 ORZO/NFT; unlock [25,45,61,74,85,94,100]% over 7d; sell tax 1%; pair ORZO/USDT 0x467401A50885103659c29Fa1DD5DEa4D6E90B94a shallow",
+      "ts": "2026-11-04T19:50:27+08:00",
+      "last": {
+        "wallet": "xiaogu.ai",
+        "action": "claim(#12471)+sell unlocked→USDT",
+        "claimTx": "0x1bc3805daa837acbefb4288b440ace8eae3e47fa9daeb2e0c3718a38aa28d589",
+        "sellTx": "0x102c3baba2aa05bfbcbb355beb1f7c9c047fb386b45737f2a0df39d345ae3599",
+        "tokenId": 12471,
+        "claimedORZO": 13333,
+        "unlockedSold": 3333.25,
+        "usdtReceived": 0.014213568147819454,
+        "lockedLeft": 9999.75,
+        "claimGasBNB": 1.8978460294341e-05,
+        "sellGasBNB": 2.1494162268912e-05,
+        "ok": true,
+        "at": "2026-11-04T19:50:27+08:00",
+        "poolNote": "USDT reserve ~0.19 at sell; heavy impact"
+      },
+      "pair": "0x467401A50885103659c29Fa1DD5DEa4D6E90B94a",
+      "claim": {
+        "selector": "0x6ba4c138",
+        "signature": "claim(uint256[])",
+        "claimOpen": "0x4b8bcb58",
+        "isClaimed": "0x9e34070f",
+        "perNft": 13333,
+        "unlockPct": [
+          25,
+          45,
+          61,
+          74,
+          85,
+          94,
+          100
+        ],
+        "sellTaxPct": 1
+      }
+    },
+    {
+      "id": "jinhou-bayc",
+      "name": "Bored Ape Yacht (BAYC) / jinhou",
+      "url": "https://jinhou.onrender.com/",
+      "ca": "0xA178Dd21FD274b25e92c4Ab4A58A8d0B6bdfAE6b",
+      "token": "0xEA2390207d2e36779b47bf9839d37746e805C4ed",
+      "chainId": 56,
+      "notes": "Free claimFree() 1/Agent 950 BAYC shares#1-2000. Pre-open mintShares 1.5 USDT 9400 BAYC #2001-10000 Agent-gated max10. Pool at #10000.",
+      "checkedAt": "2026-11-04T22:09+08:00",
+      "lastResult": "free sold out freeClaimed=2000 freeRound=false nextPrice=1.5USDT sold=2174; xiaogu hasAgentId freeUsed=false but FreeRoundOver; no paid mint",
+      "selectors": {
+        "claimFree()": "0xf366afc9",
+        "mintShares(uint256,address,bool,uint256)": "0x918fcdda",
+        "stats()": "0xd80528ae",
+        "userInfo(address)": "0x1959a002"
+      }
+    }
+  ]
+}
